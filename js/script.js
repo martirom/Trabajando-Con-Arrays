@@ -24,12 +24,21 @@ const strangeArray = [
   "JavaScript",
 ];
 
+// Función para poder filtrar el arreglo que comprueba si el elemento es String
+function esString(elemento) {
+  return typeof elemento === "string";
+}
+
 // Función que recibe por parámetro un array y muestra sus elementos en pantalla
 function showList(array) {
   const container = document.getElementById("list");
   container.innerHTML = "";
+  // Nuevo array con el filtro aplicado
+  const arrayStrings = array.filter(esString);
+  // Se ordena el array de forma case-insensitive
+  arrayStrings.sort((a,b) => a.toLowerCase().localeCompare(b.toLowerCase()));
   // Más info de forEach => https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
-  array.forEach((element) => {
+  arrayStrings.forEach((element) => {
     const li = document.createElement("li");
     li.appendChild(document.createTextNode(element));
     container.appendChild(li);
@@ -37,6 +46,5 @@ function showList(array) {
 }
 
 document.addEventListener("DOMContentLoaded", (e) => {
-  // Escribe tu solución aquí
-  // Sugerencia de cómo mostrar el array => showList(strangeArray);
+  showList(strangeArray);
 });
